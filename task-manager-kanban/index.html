@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Gestor de tareas Kanban desarrollado con JavaScript Vanilla.">
+  <title>TaskFlow — Kanban</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./css/styles.css">
+  <script type="module" src="./js/app.js"></script>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand" href="#" aria-label="TaskFlow inicio"><span class="brand-mark">T</span><span>taskflow</span></a>
+      <div class="workspace-label">WORKSPACE</div>
+      <button class="nav-item active" type="button"><span>▦</span> Mi tablero</button>
+      <div class="sidebar-bottom">
+        <div class="profile-avatar">DF</div>
+        <div><strong>Mi espacio</strong><small>Plan personal</small></div>
+        <span class="profile-menu">•••</span>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <div class="breadcrumb">Workspace <span>/</span> <strong>Mi tablero</strong></div>
+        <div class="topbar-right"><span class="online-dot"></span><span>Guardado localmente</span></div>
+      </header>
+
+      <section class="board-header">
+        <div>
+          <div class="eyebrow">GESTIÓN DE PROYECTOS</div>
+          <h1>Mi tablero</h1>
+          <p class="subtitle">Organiza tus tareas y mantén el foco en lo importante.</p>
+        </div>
+        <button id="add-task-button" class="primary-button" type="button"><span>＋</span> Nueva tarea</button>
+      </section>
+
+      <section class="toolbar" aria-label="Filtros de tareas">
+        <label class="search-box"><span>⌕</span><input id="search-input" type="search" placeholder="Buscar tareas..." autocomplete="off"></label>
+        <div class="filter-wrap">
+          <label for="priority-filter">Prioridad</label>
+          <select id="priority-filter">
+            <option value="all">Todas</option>
+            <option value="high">Alta</option>
+            <option value="medium">Media</option>
+            <option value="low">Baja</option>
+          </select>
+        </div>
+        <div class="task-counter" id="task-counter">0 tareas</div>
+      </section>
+
+      <section id="board" class="board" aria-label="Tablero Kanban">
+        <div class="column" data-status="todo">
+          <div class="column-heading"><div class="column-title"><span class="status-dot todo-dot"></span><h2>Por hacer</h2><span class="column-count" data-count="todo">0</span></div><button class="column-add" data-add-status="todo" aria-label="Agregar tarea por hacer">＋</button></div>
+          <div class="task-list" data-list="todo"></div>
+          <button class="add-card" data-add-status="todo">＋ Añadir tarea</button>
+        </div>
+        <div class="column" data-status="in-progress">
+          <div class="column-heading"><div class="column-title"><span class="status-dot progress-dot"></span><h2>En progreso</h2><span class="column-count" data-count="in-progress">0</span></div><button class="column-add" data-add-status="in-progress" aria-label="Agregar tarea en progreso">＋</button></div>
+          <div class="task-list" data-list="in-progress"></div>
+          <button class="add-card" data-add-status="in-progress">＋ Añadir tarea</button>
+        </div>
+        <div class="column" data-status="done">
+          <div class="column-heading"><div class="column-title"><span class="status-dot done-dot"></span><h2>Completadas</h2><span class="column-count" data-count="done">0</span></div><button class="column-add" data-add-status="done" aria-label="Agregar tarea completada">＋</button></div>
+          <div class="task-list" data-list="done"></div>
+          <button class="add-card" data-add-status="done">＋ Añadir tarea</button>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <dialog id="task-dialog" class="task-dialog">
+    <form id="task-form" method="dialog">
+      <div class="dialog-header"><div><div class="eyebrow">DETALLES DE TAREA</div><h2 id="dialog-title">Crear tarea</h2></div><button type="button" id="close-dialog" class="icon-button" aria-label="Cerrar">×</button></div>
+      <input type="hidden" id="task-id">
+      <label class="field-label" for="task-title">Título</label>
+      <input class="field-input" id="task-title" name="title" maxlength="90" placeholder="Ej. Diseñar landing page" required>
+      <label class="field-label" for="task-description">Descripción</label>
+      <textarea class="field-input" id="task-description" name="description" rows="3" maxlength="300" placeholder="Describe brevemente la tarea..."></textarea>
+      <div class="form-row">
+        <div><label class="field-label" for="task-priority">Prioridad</label><select class="field-input" id="task-priority"><option value="low">Baja</option><option value="medium" selected>Media</option><option value="high">Alta</option></select></div>
+        <div><label class="field-label" for="task-status">Estado</label><select class="field-input" id="task-status"><option value="todo">Por hacer</option><option value="in-progress">En progreso</option><option value="done">Completada</option></select></div>
+      </div>
+      <div class="dialog-actions"><button type="button" id="cancel-dialog" class="secondary-button">Cancelar</button><button type="submit" class="primary-button">Guardar tarea</button></div>
+    </form>
+  </dialog>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
