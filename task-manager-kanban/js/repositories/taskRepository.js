@@ -1,10 +1,5 @@
 const STORAGE_KEY = "taskflow.tasks.v1";
 
-/**
- * Repository Pattern:
- * la aplicación no necesita conocer cómo se almacenan los datos.
- * En el futuro podemos reemplazar LocalStorage por una API REST.
- */
 export class TaskRepository {
   async getAll() {
     try {

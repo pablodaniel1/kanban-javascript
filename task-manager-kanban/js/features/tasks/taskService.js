@@ -3,7 +3,6 @@ import { createId } from "../../utils/helpers.js";
 const VALID_STATUSES = ["todo", "in-progress", "done"];
 const VALID_PRIORITIES = ["low", "medium", "high"];
 
-/** Lógica de negocio: valida y transforma los datos antes de modificar el estado. */
 export class TaskService {
   constructor(store, repository) {
     this.store = store;

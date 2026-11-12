@@ -1,7 +1,4 @@
-/**
- * Store + Observer Pattern:
- * mantiene el estado centralizado y notifica a las vistas suscritas.
- */
+
 export class Store {
   #state;
   #listeners = new Set();
